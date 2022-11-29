@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=weddingmanager
+POSTGRES_USER=jSIyktpNtzkfbhAlNLNtGTzDhNQypPQb
+POSTGRES_PASSWORD=SvwdOBKhnqko8q4J9IMn6DG7AOxwhdGVwZtYFfuvINuBmKFaoVGhzgISnn9Qcgud

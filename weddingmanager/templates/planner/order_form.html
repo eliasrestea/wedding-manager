@@ -1,0 +1,108 @@
+{% extends 'basenonav.html' %}
+{% load static i18n %}
+
+{% block content %}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-9 position-fixed" style="width: inherit;">
+        <div class="img-fluid"><img src="{% static 'images/display/venue.jpg' %} "></div>
+        <div class="fixed-bottom d-flex justify-content-center">
+          <button type='button' class='btn btn-primary btn-lg btn-start bg-dark'>12021 EUR</button>
+        </div>
+      </div>
+      <div class="col-md-3 offset-sm-9">
+        <form method="post">
+          {% csrf_token %}
+          <div class="container text-center">
+            <h2>{{ venue }}</h2>
+            <h5>Valabil incepand cu  {{ venue.date }}</h5>
+            <h5 class="mt-4">Capacitate {{ venue.capacity }} persoane</h5>
+          </div>
+          {% for venue in venues %}
+            <div class="mt-5 d-grid gap-2">
+              <input type="radio" class="btn-check" name="options" id="option{{ venue.id }}" autocomplete="off" checked/>
+              <label class="btn btn-secondary bg-white btn-outline-secondary btn-lg" for="option{{ venue.id    }}">{{ venue }}</label>
+            </div>
+          {% endfor %}
+          <div class="mt-4 text-center mb-10">
+            <button type="button" class="btn btn-primary btn-sm" name="functions">Functions</button>
+          </div>
+
+          <div class="mt-5 mb-12 text-center">
+            <h2>Garden access</h2>
+            <h6>1500 EUR</h6>
+            <h6>Gradina este dotata cu o multime de locuri si activitati.
+              De la locuri de poze pana la loc de foc de tabara.
+              Accesul la gradina este o optiune foarte buna de ales
+            </h6>
+            <div class="mt-4 text-center">
+              <button type="button" class="btn btn-primary btn-sm" name="functions">Adauga</button>
+            </div>
+          </div>
+
+          <div class="mt-5 mb-12 text-center">
+            <h2>Candy bar</h2>
+            <h6>1500 EUR</h6>
+            <h6>Candy bar-ul este o optiune foarte buna de ales.
+              Majoritatea invitatiilor vor sa aiba un bufet suedez cu dulciuri.
+              Toate dulciurile sunt asigurate de noi.
+            </h6>
+            <div class="mt-4 text-center">
+              <button type="button" class="btn btn-primary btn-sm" name="functions">Adauga</button>
+            </div>
+          </div>
+
+          <div class="mt-5 mb-12 text-center">
+            <h2>Games</h2>
+            <h6>1500 EUR</h6>
+            <h6>Jocurile pregatite de noi sunt cele mai bune jocuri ce exista.
+              Avem un mc de pregatit si jocurile sunt cu mirii si includ si nasii .
+              Toti invitatii vor avea ocazia sa incerce cel putin unul din jocurile pregatite de noi.
+            </h6>
+            <div class="mt-4 text-center">
+              <button type="button" class="btn btn-primary btn-sm" name="functions">Adauga</button>
+            </div>
+          </div>
+
+          <div class="mt-5 mb-12 text-center">
+            <h2>Bautura nelimitata</h2>
+            <h6>1500 EUR</h6>
+            <h6>Avem de oferit toate bauturile ce ti le poti dorii:
+              Avem bere vin tuica taria tot ce tu si unchiul tau betivan va puteti dorii.
+              Daca vei cumpara aceasta oferim si 2 butoaie de tuica sa iei acasa.
+            </h6>
+            <div class="mt-4 text-center">
+              <button type="button" class="btn btn-primary btn-sm" name="functions">Adauga</button>
+            </div>
+          </div>
+
+          <div class="mt-5 mb-12 text-center">
+            <h2>Videograf si fotograf</h2>
+            <h6>1500 EUR + 3000 EUR</h6>
+            <h6>Avem de oferit cel mai bun fotograf si videograf de pe piata.
+              Toti invitatii pe care i-am avut au dat feedback bun.
+              El v-a sta toata ziua cu voi si v-a face cel mai bun video pe care ti l-ai putea dorii.
+            </h6>
+            <div class="mt-4 text-center">
+              <button type="button" class="btn btn-primary btn-sm" name="functions">Adauga foto</button>
+              <button type="button" class="btn btn-primary btn-sm mx-2" name="functions">Adauga video</button>
+            </div>
+          </div>
+
+          <div class="mt-4 mb-10 text-center">
+            <h4>Alege data in care vrei sa tii evenimentul.</h4>
+          </div>
+
+          <div class="mt-3 mb-14 text-center">
+            <h2>Adauga programarea</h2>
+            <div class="mt-4 text-center">
+              <button type="button" class="btn btn-primary btn-lg" name="functions">Continua cu plata</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
