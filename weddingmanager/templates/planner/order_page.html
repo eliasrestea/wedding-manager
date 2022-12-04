@@ -1,0 +1,46 @@
+{% extends 'basenonav.html' %}
+{% load crispy_forms_tags %}
+{% load static i18n %}
+{% block content %}
+
+  <div class="container-fluid">
+    {#  aici vine slideru#}
+    <div class="row">
+
+      <div id="venue-info" class="row">
+        <img id="venue-pic" class="img-fluid d-sm-none" src="{% static 'images/display/venue.jpg' %}">
+        <div id="venue-title"></div>
+        <div id="venue-options" class="p-3">
+          {% crispy form %}
+        </div>
+      </div>
+
+      <div id="services"></div>
+
+      <div class="col-12">
+        {#        mobile #}
+
+        <div class="fixed-bottom d-flex flex-column justify-content-center">
+          <button type='button' class='btn btn-primary btn-lg btn-start bg-dark'>12021 EUR</button>
+        </div>
+      </div>
+      <div class="col-12">
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+
+{#                    {% for venue in venues %}#}
+{#                      <div class="mt-5 d-grid gap-2">#}
+{#                        <input#}
+{#                          type="radio"#}
+{#                          class="btn-check"#}
+{#                          name="options"#}
+{#                          id="option{{ venue.id }}"#}
+{#                          autocomplete="off" checked>#}
+{#                        <label class="btn btn-secondary bg-white btn-outline-secondary btn-lg" for="option{{ venue.id }}">{{ venue }}</label>#}
+{#                      </div>#}
+{#                    {% endfor %}#}

@@ -1,6 +1,7 @@
 {% load static i18n %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 {% load django_htmx %}
+{% load widget_tweaks %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta charset="utf-8">
@@ -29,6 +30,8 @@
       <!-- HTMX -->
       <script src="{% static 'js/htmx.min.js' %}" defer></script>
       {% django_htmx_script %}
+      <!-- Alpine JS -->
+      <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
       <!-- MDBootstrap -->
       <script defer src="{% static "js/mdb.min.js" %}" ></script>
 
