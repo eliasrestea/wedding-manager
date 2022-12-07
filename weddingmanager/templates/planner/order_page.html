@@ -4,43 +4,88 @@
 {% block content %}
 
   <div class="container-fluid">
-    {#  aici vine slideru#}
+    {#      aici vine slideru#}
     <div class="row">
 
-      <div id="venue-info" class="row">
-        <img id="venue-pic" class="img-fluid d-sm-none" src="{% static 'images/display/venue.jpg' %}">
-        <div id="venue-title"></div>
-        <div id="venue-options" class="p-3">
-          {% crispy form %}
+
+      {#       desktop photo - left colon#}
+      <div id="left-colon" class="col-9 d-none d-md-block div-sticky">
+        {#        navbar left#}
+        <div class="position-sticky sticky-top transparent">
+          <nav class="navbar navbar-expand-md shadow-0 navbar-fixed-top">
+            <div class="container-fluid">
+              <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'home' %}">Wedding</a>
+            </div>
+          </nav>
+        </div>
+        {#        image#}
+        <img id="venue-pic" class="img-fluid d-flex" src="{% static 'images/display/venue.jpg' %}">
+      </div>
+
+
+      {#       mobile/right-colon #}
+      <div id="right-colon" class="col-md-3 pt-5">
+        {#      navbar right#}
+
+        <div id="venue-info" class="row">
+          <img id="venue-pic" class="img-fluid d-md-none" src="{% static 'images/display/venue.jpg' %}">
+          <div id="venue-title" class="text-center text-black"><h2></h2></div>
+          <div id="venue-availability" class="text-center"><h5></h5></div>
+
+          <div id="venue-options" class="p-3">
+            {% for venue in venues %}
+              <div class="form-check"
+                   hx-get="{% url "planner:detail" venue %}"
+                   hx-target="#services">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  name="venue"
+                  value="{{ venue.id }}"
+                  id="option{{ venue.id }}"
+                  autocomplete="off">
+                <label class="form-check-label" for="option{{ venue.id }}">{{ venue }}</label>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div id="services"></div>
+
+        <div class="col-12">
+          <div class="fixed-bottom d-flex flex-column justify-content-center">
+          </div>
         </div>
       </div>
 
-      <div id="services"></div>
-
-      <div class="col-12">
-        {#        mobile #}
-
-        <div class="fixed-bottom d-flex flex-column justify-content-center">
-          <button type='button' class='btn btn-primary btn-lg btn-start bg-dark'>12021 EUR</button>
-        </div>
-      </div>
-      <div class="col-12">
-
-      </div>
     </div>
   </div>
 
 {% endblock %}
 
 
-{#                    {% for venue in venues %}#}
-{#                      <div class="mt-5 d-grid gap-2">#}
-{#                        <input#}
-{#                          type="radio"#}
-{#                          class="btn-check"#}
-{#                          name="options"#}
-{#                          id="option{{ venue.id }}"#}
-{#                          autocomplete="off" checked>#}
-{#                        <label class="btn btn-secondary bg-white btn-outline-secondary btn-lg" for="option{{ venue.id }}">{{ venue }}</label>#}
-{#                      </div>#}
-{#                    {% endfor %}#}
+
+
+{#<script>#}
+{#    //get the form#}
+{#    const venueForm = document.getElementById('venue-options')#}
+{#    //when implementing, replace [name='radio'] with name of radio input fields#}
+{#    const venueRadioButtons = document.querySelectorAll("input[name='venue']")#}
+{#    //get the default venue URL for later alteration#}
+{#    const venueURL = venueForm.getAttribute('hx-get')#}
+{##}
+{#    // create a click handler to change the URL to selected radiobutton#}
+{#    const clickHandler = () => {#}
+{#      //get the slug value#}
+{#      let radioButtonSlug=document.querySelector("input[name='venue']:checked").value()#}
+{#      //use regular expression to replace last '/word/' value with slug value#}
+{#      let newVenueUrl = venueURL.replace(/\/\w+\/$/, "/" + radioButtonSlug + "/")#}
+{#      //reset the hx_get value#}
+{#      venueForm.setAttribute('hx-get', newVenueUrl)#}
+{#    };#}
+{#    // Assign the handler to the radio buttons#}
+{#    venueRadioButtons.forEach(i => i.onchange = () => clickHandler());#}
+{#</script>#}

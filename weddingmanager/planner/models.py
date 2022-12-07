@@ -13,12 +13,12 @@ class Service(models.Model):
 
 
 class Venue(models.Model):
-    # name
     slug = models.SlugField()
-    # name = models.CharField(max_length=50)
     services = models.ManyToManyField(Service)
     description = models.CharField(max_length=500, null=True)
-    capacity = models.FloatField()
+    capacity = models.IntegerField()
+    surface_area = models.IntegerField()
+    parking_spaces = models.IntegerField()
     venue_price = models.FloatField(null=True)
     # available =
 

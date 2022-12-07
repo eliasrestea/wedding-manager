@@ -44,19 +44,6 @@
 
   <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
-    <div class="mb-1 sticky-top">
-      <nav class="navbar navbar-expand-md navbar-light bg-light shadow-0">
-        <div class="container-fluid">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'home' %}">Wedding</a>
-
-        </div>
-      </nav>
-
-    </div>
-
     <div class="container-fluid">
 
       {% if messages %}

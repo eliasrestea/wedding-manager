@@ -5,34 +5,34 @@
   <div class="mt-4 text-center mb-10">
     <button type="button" class="btn btn-primary btn-sm" name="functions">Details</button>
   </div>
-{#  {% for service in venue.services %}#}
-{#    <div class="mt-5 mb-12 text-center">#}
-{#      <h2>{{ service }}</h2>#}
-{#      <h6>{{ service.price }} EUR</h6>#}
-{#      <h6>{{ service.description }}</h6>#}
-{#      <div#}
-{#        hx-trigger="OrderChanged from:body"#}
-{#        class="mt-4 text-center">#}
-{#        {% if not venue_chosen.service %}#}
-{#          <button#}
-{#            hx-post="{% url "planner:create" %}"#}
-{#            hx-trigger="click"#}
-{#            type="button"#}
-{#            class="btn btn-primary btn-sm"#}
-{#            name="functions"#}
-{#          >Adauga</button>#}
-{#        {% else %}#}
-{#          <button#}
-{#            hx-post="{% url "planner:create" %}"#}
-{#            hx-trigger="click"#}
-{#            type="button"#}
-{#            class="btn btn-light btn-outline-black btn-sm"#}
-{#            name="functions"#}
-{#          >Elimina</button>#}
-{#        {% endif %}#}
-{#      </div>#}
-{#    </div>#}
-{#  {% endfor %}#}
+  {#  {% for service in venue.services %}#}
+  {#    <div class="mt-5 mb-12 text-center">#}
+  {#      <h2>{{ service }}</h2>#}
+  {#      <h6>{{ service.price }} EUR</h6>#}
+  {#      <h6>{{ service.description }}</h6>#}
+  {#      <div#}
+  {#        hx-trigger="OrderChanged from:body"#}
+  {#        class="mt-4 text-center">#}
+  {#        {% if not venue_chosen.service %}#}
+  {#          <button#}
+  {#            hx-post="{% url "planner:create" %}"#}
+  {#            hx-trigger="click"#}
+  {#            type="button"#}
+  {#            class="btn btn-primary btn-sm"#}
+  {#            name="functions"#}
+  {#          >Adauga</button>#}
+  {#        {% else %}#}
+  {#          <button#}
+  {#            hx-post="{% url "planner:create" %}"#}
+  {#            hx-trigger="click"#}
+  {#            type="button"#}
+  {#            class="btn btn-light btn-outline-black btn-sm"#}
+  {#            name="functions"#}
+  {#          >Elimina</button>#}
+  {#        {% endif %}#}
+  {#      </div>#}
+  {#    </div>#}
+  {#  {% endfor %}#}
   <div class="mt-4 mb-10 text-center">
     <h4>Alege data in care vrei sa tii evenimentul.</h4>
   </div>
@@ -48,8 +48,5 @@
 
 
 {# Hx-oob swapping hx-oob-target #}
-{#<div class="container text-center">#}
-{#  <h2>{{ venue }}</h2>#}
-{#  <h5>Valabil incepand cu  {{ venue.date }}</h5>#}
-{#  <h5 class="mt-4">Capacitate {{ venue.capacity }} persoane</h5>#}
-{#</div>#}
+<div id="venue-title" hx-swap-oob="true" class="text-center text-black"><h2>{{ venue }}</h2></div>
+<div id="venue-availability" hx-swap-oob="true" class="text-center"><p>Valabil incepand cu 12 martie 2022</p></div>

@@ -16,20 +16,26 @@ class VenueDetailView(
 ):  # When the venue is chosen we inject the data of that venue
     model = Venue
     context_object_name = "venue"
-    # slug_url_kwarg = 'slug'
+    slug_url_kwarg = "slug"
     template_name = "planner/venue_services_partial.html"
 
 
 class OrderCreateView(CreateView):
     model = Order
     form_class = OrderForm
+    template_name = "planner/order_page.html"
 
-    def get_template_names(self, *args, **kwargs):
-        if self.request.htmx:
-            # TODO: in order form partial descopera if many to many is added
-            return "planner/order_form_partial.html"
-        else:
-            return "planner/order_page.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["venues"] = Venue.objects.all()
+        return context
+
+    # def get_template_names(self, *args, **kwargs):
+    #     if self.request.htmx:
+    #         # TODO: in order form partial descopera if many to many is added
+    #         return "planner/order_form_partial.html"
+    #     else:
+    #         return "planner/order_page.html"
 
 
 # def services(request, pk):
