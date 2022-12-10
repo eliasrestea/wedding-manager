@@ -5,10 +5,10 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
-from weddingmanager.planner.views import VenueHomeView
-
 urlpatterns = [
-    path("", VenueHomeView.as_view(), name="home"),
+    path(
+        "", TemplateView.as_view(template_name="planner/venue_list.html"), name="home"
+    ),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),

@@ -58,3 +58,10 @@
     height: 100vh;
     top: 0;
                                                                                                                                                   }
+                                                                                                                                                  .fixed-witdh{
+                                                                                                                                                    width:330px;
+                                                                                                                                                  }
+  body.modal-open .bg{
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+  }

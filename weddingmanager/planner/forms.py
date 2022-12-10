@@ -16,4 +16,6 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = ["chosen_services"]
 
-        # widgets = {"venue": forms.RadioSelect()}
+        widgets = {
+            "chosen_services": forms.CheckboxSelectMultiple,
+        }

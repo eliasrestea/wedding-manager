@@ -28,6 +28,6 @@ class Venue(models.Model):
 
 class Order(models.Model):
     venue = models.ForeignKey(Venue, on_delete=models.SET_NULL, null=True)
-    chosen_services = models.ManyToManyField(Service, null=True)
-    total_price = models.FloatField(null=True)
+    chosen_services = models.ManyToManyField(Service, null=True, blank=True)
+    total_price = models.FloatField(null=True, blank=True)
     # date =

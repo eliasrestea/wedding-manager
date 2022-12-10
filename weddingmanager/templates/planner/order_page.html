@@ -1,8 +1,12 @@
 {% extends 'basenonav.html' %}
 {% load crispy_forms_tags %}
 {% load static i18n %}
-{% block content %}
 
+{% block modal %}
+  <div id="modals-here" class="bg"></div>
+
+{% endblock %}
+{% block content %}
   <div class="container-fluid">
     {#      aici vine slideru#}
     <div class="row">
@@ -22,23 +26,27 @@
           </nav>
         </div>
         {#        image#}
-        <img id="venue-pic" class="img-fluid d-flex" src="{% static 'images/display/venue.jpg' %}">
+        <img id="venue-pic" class="img-fluid d-flex w-100" src="{% static 'images/display/venue.jpg' %}">
       </div>
 
 
       {#       mobile/right-colon #}
-      <div id="right-colon" class="col-md-3 pt-5">
+      <div id="right-colon" class="col-md-3 pt-5 position-relative">
         {#      navbar right#}
 
         <div id="venue-info" class="row">
           <img id="venue-pic" class="img-fluid d-md-none" src="{% static 'images/display/venue.jpg' %}">
-          <div id="venue-title" class="text-center text-black"><h2></h2></div>
+          <div id="venue-title" class="text-center text-black"><h2>Complex wedding</h2></div>
           <div id="venue-availability" class="text-center"><h5></h5></div>
-
+          <div id="venue-details" class="row text-center">
+            <div id="venue-surface" class="col-3 mx-auto"><h5 class=" text-center">1500</h5><span>Suprafata</span></div>
+            <div id="venue-capacity" class="col-3 mx-auto"><h5 class=" text-center">1000</h5><span>Capacitate</span></div>
+            <div id="venue-parking" class="col-3 mx-auto"><h5 class=" text-center">400</h5><span>Parcare</span></div>
+          </div>
           <div id="venue-options" class="p-3">
             {% for venue in venues %}
               <div class="form-check"
-                   hx-get="{% url "planner:detail" venue %}"
+                   hx-get="{% url "planner:servicesDetail" venue %}"
                    hx-target="#services">
                 <input
                   type="radio"
@@ -57,6 +65,7 @@
 
         <div class="col-12">
           <div class="fixed-bottom d-flex flex-column justify-content-center">
+{#            pret#}
           </div>
         </div>
       </div>
