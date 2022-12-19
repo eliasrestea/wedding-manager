@@ -23,12 +23,12 @@
              class="mt-4 text-center">
           {% if not venue_chosen.service %}
             <button
-              hx-post="{% url 'planner:create' %}"
+              hx-post="{% url 'planner:create'%}"
               hx-include="[name='add']"
               type="button"
               class="btn btn-primary btn-sm"
             >
-              <input type="hidden" value="addService" name="add">
+              <input type="hidden" value="{{ service }}" name="add">
               Adauga
             </button>
           {% else %}
@@ -38,7 +38,7 @@
               type="button"
               class="btn btn-light btn-outline-black btn-sm"
             >
-            <input type="hidden" value="deleteService" name="delete">
+            <input type="hidden" value="{{ service }}" name="delete">
               Elimina
             </button>
           {% endif %}
@@ -53,7 +53,7 @@
       <h2>Adauga programarea</h2>
       <div class="mt-4 text-center">
         <button
-          hx-include="name='id'"
+          hx-include="[name='id']"
           type="submit"
           class="btn btn-primary btn-lg">
           <input type="hidden" value="{{ venue.id }}" name="id">

@@ -19,6 +19,10 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path("planner/", include("weddingmanager.planner.urls", namespace="planner")),
+    path(
+        "content-manager/",
+        include("weddingmanager.content_manager.urls", namespace="content_manager"),
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

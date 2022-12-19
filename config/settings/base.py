@@ -78,6 +78,7 @@ LOCAL_APPS = [
     "weddingmanager.users",
     # Your stuff: custom apps go here
     "weddingmanager.planner.apps.PlannerConfig",
+    "weddingmanager.content_manager.apps.ContentManagerConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
