@@ -6,9 +6,7 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path(
-        "", TemplateView.as_view(template_name="planner/venue_list.html"), name="home"
-    ),
+    path("", TemplateView.as_view(template_name="venues/venue_list.html"), name="home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
@@ -18,11 +16,8 @@ urlpatterns = [
     path("users/", include("weddingmanager.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("planner/", include("weddingmanager.planner.urls", namespace="planner")),
-    path(
-        "content-manager/",
-        include("weddingmanager.content_manager.urls", namespace="content_manager"),
-    ),
+    path("order/", include("weddingmanager.orders.urls", namespace="orders")),
+    path("venues/", include("weddingmanager.venues.urls", namespace="venues")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

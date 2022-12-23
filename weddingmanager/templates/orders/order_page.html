@@ -1,0 +1,80 @@
+{% extends 'basenonav.html' %}
+{% load crispy_forms_tags %}
+{% load static i18n %}
+
+{% block modal %}
+  <div id="modals-here"></div>
+
+{% endblock %}
+{% block content %}
+  <div class="container-fluid basic-transition">
+    <div class="row">
+      {#       desktop photo - left colon#}
+      <div id="left-colon" class="col-9 d-none d-lg-block div-sticky ps-0 pb-0">
+        <img id="venue-pic" class="img-fluid d-flex w-100 h-100" src="{% static 'images/display/venue.jpg' %}">
+      </div>
+
+      {#       mobile/right-colon #}
+      <div id="right-colon" class="col-lg-3 pt-2 position-relative">
+        {#      navbar right#}
+        <div id="venue-info" class="row">
+          <div class="d-lg-none">
+            <img id="venue-pic" class="img-fluid h-100 w-100" src="{% static 'images/display/venue.jpg' %}">
+          </div>
+          <div id="venue-title" class="text-center text-black mt-2 basic-transition"><h2>Complex wedding</h2></div>
+          <div id="venue-availability" class="text-center basic-transition"><h5></h5></div>
+          <div id="venue-details" class="row text-center">
+            <div id="venue-surface" class="col-3 mx-auto"><h5 class="text-center">1500</h5><span>Suprafata</span></div>
+            <div id="venue-capacity" class="col-3 mx-auto"><h5 class="text-center">1000</h5><span>Capacitate</span></div>
+            <div id="venue-parking" class="col-3 mx-auto"><h5 class="text-center">400</h5><span>Parcare</span></div>
+          </div>
+          <div id="venue-options" class="p-3">
+            {% for venue in venues %}
+                <input
+                  hx-get="{% url "venues:servicesDetail"  venue %}"
+                  hx-trigger="click"
+                  hx-target="#services"
+                  type="button"
+                  class="form-control mt-2 text-start"
+                  name="venue"
+                  value="{{ venue }}"
+                  readonly>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div id="services"></div>
+
+        <div class="col-12">
+          <div class="fixed-bottom d-flex flex-column justify-content-center">
+            {#            pret#}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+
+{#<script>#}
+{#    //get the form#}
+{#    const venueForm = document.getElementById('venue-options')#}
+{#    //when implementing, replace [name='radio'] with name of radio input fields#}
+{#    const venueRadioButtons = document.querySelectorAll("input[name='venue']")#}
+{#    //get the default venue URL for later alteration#}
+{#    const venueURL = venueForm.getAttribute('hx-get')#}
+{##}
+{#    // create a click handler to change the URL to selected radiobutton#}
+{#    const clickHandler = () => {#}
+{#      //get the slug value#}
+{#      let radioButtonSlug=document.querySelector("input[name='venue']:checked").value()#}
+{#      //use regular expression to replace last '/word/' value with slug value#}
+{#      let newVenueUrl = venueURL.replace(/\/\w+\/$/, "/" + radioButtonSlug + "/")#}
+{#      //reset the hx_get value#}
+{#      venueForm.setAttribute('hx-get', newVenueUrl)#}
+{#    };#}
+{#    // Assign the handler to the radio buttons#}
+{#    venueRadioButtons.forEach(i => i.onchange = () => clickHandler());#}
+{#</script>#}

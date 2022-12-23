@@ -43,7 +43,7 @@
 </head>
 
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' >
-  <div class="container-fluid">
+  <div class="">
 
     {% if messages %}
       {% for message in messages %}
@@ -55,7 +55,7 @@
     {% endif %}
 
     {% block content %}
-      <p>Use this document as a way to quick start any new project.</p>
+
     {% endblock content %}
 
   </div> <!-- /container -->
