@@ -6,9 +6,7 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ["chosen_services"]
-
-        widgets = {"chosen_services": forms.CheckboxSelectMultiple()}
+        fields = ["total_price"]
 
 
 # def __init__(self, *args, **kwargs):

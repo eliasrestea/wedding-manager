@@ -11,8 +11,10 @@
     <div class="row">
       {#       desktop photo - left colon#}
       <div id="left-colon" class="col-9 d-none d-lg-block div-sticky ps-0 pb-0">
+        <a href="{% url 'home' %}" class="h5 text-black-50 position-absolute p-3 font-monospace">Logo</a>
         <img id="venue-pic" class="img-fluid d-flex w-100 h-100" src="{% static 'images/display/venue.jpg' %}">
       </div>
+
 
       {#       mobile/right-colon #}
       <div id="right-colon" class="col-lg-3 pt-2 position-relative">
@@ -42,15 +44,7 @@
             {% endfor %}
           </div>
         </div>
-
         <div id="services"></div>
-
-        <div class="col-12">
-          <div class="fixed-bottom d-flex flex-column justify-content-center">
-            {#            pret#}
-          </div>
-        </div>
-      </div>
 
     </div>
   </div>

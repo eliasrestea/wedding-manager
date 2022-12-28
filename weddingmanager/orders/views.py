@@ -21,6 +21,16 @@ class OrderCreateView(CreateView):
 
     def form_valid(self, form):
         if self.request.htmx:
+            # Get the IDs of the chosen services
+            service_ids = self.request.POST.getlist("services")
+
+            # Set the venue field of the form
             form.instance.venue = Venue.objects.get(id=self.request.POST.get("id"))
+
+            # Save the form
             self.object = form.save()
+
+            # Add the chosen services to the Order object
+            self.object.chosen_services.add(*service_ids)
+
             return super().form_valid(form)

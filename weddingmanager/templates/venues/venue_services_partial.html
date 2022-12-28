@@ -1,72 +1,75 @@
+{% extends 'basenonav.html' %}
 {% load static i18n %}
 {% load widget_tweaks %}
 
-<div id="services" class="basic-transition">
-  <div class="mt-4 text-center mb-10">
-    <button
-      hx-get="{% url "venues:venueDetail" venue %}"
-      hx-target="#modals-here"
-      class="btn btn-primary btn-sm">
-      Details
-    </button>
-  </div>
-  <form hx-post="{% url 'orders:create' %}">
-    {% csrf_token %}
-    {% for service in venue.services.all %}
-      <div
-        hx-get="{% url 'venues:serviceFile' service %}"
-        hx-trigger="intersect threshold:1 "
-        hx-target="#venue-pic"
-        class="mb-12 lg-12 text-center">
-        <img class="img-fluid d-flex d-lg-none" src="{{ service.service_file.url }}">
-        <h2 class="mt-3">{{ service }}</h2>
-        <h6>{{ service.price }} EUR</h6>
-        <h6>{{ service.description }}</h6>
+{% block content %}
+
+  <div id="services" class="basic-transition">
+    <div class="mt-4 text-center mb-12">
+      <button
+        hx-get="{% url "venues:venueDetail" venue %}"
+        hx-target="#modals-here"
+        class="btn btn-primary btn-sm text-capitalize">
+        Details
+      </button>
+    </div>
+    <form hx-post="{% url 'orders:create' %}"
+          hx-target="body">
+      {% csrf_token %}
+      {% for service in venue.services.all %}
+        <div
+          hx-get="{% url 'venues:serviceFile' service %}"
+          hx-trigger="intersect threshold:1"
+          hx-target="#venue-pic"
+          class="mb-12 lg-12 text-center">
+          <img class="img-fluid d-flex d-lg-none" src="{{ service.service_file.url }}">
+          <h2 class="mt-3">{{ service }}</h2>
+          <h6>{{ service.price }} EUR</h6>
+          <h6>{{ service.description }}</h6>
+          <div x-data="{ showLabel1: false }" class="mt-4 text-center">
+            <input type="checkbox" x-model="showLabel1" class="btn-check" id="btn-check{{ service.id }}" name="services" value="{{ service.id }}" >
+            <label class="btn btn-primary btn-sm text-capitalize" x-show="!showLabel1" for="btn-check{{ service.id }}">Adauga</label>
+            <label class="btn btn-secondary btn-sm text-dark text-capitalize" x-show="showLabel1" for="btn-check{{ service.id }}">Elimina</label>
+          </div>
+
+        </div>
+      {% endfor %}
+      <div class="mt-4 mb-10 text-center">
+        <h4>Alege data in care vrei sa tii evenimentul.</h4>
+      </div>
+      <div class="mt-3 mb-14 text-center">
+        <h2>Adauga programarea</h2>
         <div class="mt-4 text-center">
-            <button
-{#        hx-trigger-offset="50%"#}
-              type="button"
-              class="btn btn-primary btn-sm">
-              Adauga
-            </button>
+          <button
+            hx-include="[name='id']"
+            type="submit"
+            class="btn btn-primary btn-lg ">
+            <input type="hidden" value="{{ venue.id }}" name="id">
+            Submit
+          </button>
         </div>
       </div>
-    {% endfor %}
-    <div class="mt-4 mb-10 text-center">
-      <h4>Alege data in care vrei sa tii evenimentul.</h4>
-    </div>
-
-    <div class="mt-3 mb-14 text-center">
-      <h2>Adauga programarea</h2>
-      <div class="mt-4 text-center">
-        <button
-          hx-include="[name='id']"
-          type="submit"
-          class="btn btn-primary btn-lg ">
-          <input type="hidden" value="{{ venue.id }}" name="id">
-          Submit
-        </button>
-      </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 
 
 
-{# Hx-oob swapping hx-oob-target #}
+  {# Hx-oob swapping hx-oob-target #}
 
-<img id="venue-pic" hx-swap-oob="true" class="img-fluid d-flex w-100 h-100 basic-transition" src="{{ venue.venue_file.url }}">
-<div id="venue-title" hx-swap-oob="true" class="text-center text-black basic-transition"><h2>{{ venue }}</h2></div>
-<div id="venue-availability" hx-swap-oob="true" class="text-center basic-transition"><p>Valabil incepand cu 12 martie 2022</p></div>
-<div id="venue-surface" hx-swap-oob="true" class="col-3 mx-auto basic-transition">
-  <h5>{{ venue.surface_area }}</h5>
-  <span class="text-opacity-25 basic-transition" >Suprafata</span>
-</div>
-<div id="venue-capacity" hx-swap-oob="true" class="col-3 mx-auto basic-transition">
-  <h5>{{ venue.capacity }}</h5>
-  <span>Capacitate</span>
-</div>
-<div id="venue-parking" hx-swap-oob="true" class="col-3 mx-auto basic-transition">
-  <h5>{{ venue.parking_spaces }}</h5>
-  <span>Parcare</span>
-</div>
+  <img id="venue-pic" hx-swap-oob="true" class="img-fluid d-flex w-100 h-100 basic-transition" src="{{ venue.venue_file.url }}">
+  <div id="venue-title" hx-swap-oob="true" class="text-center text-black basic-transition"><h2>{{ venue }}</h2></div>
+  <div id="venue-availability" hx-swap-oob="true" class="text-center basic-transition"><p>Valabil incepand cu 12 martie 2022</p></div>
+  <div id="venue-surface" hx-swap-oob="true" class="col-3 mx-auto basic-transition">
+    <h5>{{ venue.surface_area }}</h5>
+    <span class="text-opacity-25 basic-transition" >Suprafata</span>
+  </div>
+  <div id="venue-capacity" hx-swap-oob="true" class="col-3 mx-auto basic-transition">
+    <h5>{{ venue.capacity }}</h5>
+    <span>Capacitate</span>
+  </div>
+  <div id="venue-parking" hx-swap-oob="true" class="col-3 mx-auto basic-transition">
+    <h5>{{ venue.parking_spaces }}</h5>
+    <span>Parcare</span>
+  </div>
+
+{% endblock %}
