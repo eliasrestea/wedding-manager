@@ -5,7 +5,7 @@ from django.db import models
 
 class Service(models.Model):
     slug = models.SlugField(max_length=50)
-    price = models.FloatField()
+    service_price = models.IntegerField()
     description = models.CharField(max_length=500, null=True)
     service_file = models.ImageField(null=True)
 
@@ -20,7 +20,7 @@ class Venue(models.Model):
     capacity = models.IntegerField()
     surface_area = models.IntegerField()
     parking_spaces = models.IntegerField()
-    venue_price = models.FloatField(null=True)
+    venue_price = models.IntegerField(null=True)
     venue_file = models.ImageField(null=True)
     # available =
 

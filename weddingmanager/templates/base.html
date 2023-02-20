@@ -17,7 +17,11 @@
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="{% static "css/mdb.min.css" %}">
     <!-- Your stuff: Third-party CSS libraries go here -->
-
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <!-- This file stores project-specific CSS -->
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
   {% endblock %}
@@ -45,49 +49,151 @@
 
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
-<div class="mb-1">
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container-fluid">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="{% url 'home' %}">WeddingManager</a>
+<!-- SideNav -->
+<nav
+  id="sidenav-1"
+  class="sidenav"
+  data-mdb-hidden="false"
+  data-mdb-accordion="true"
+>
+  <a
+    href="{% url 'orders:order-view' request.user.username %}"
+    class="ripple d-flex justify-content-center py-4"
+    data-mdb-ripple-color="primary">
+    <img
+      id="MDB-logo"
+      src="https://mdbcdn.b-cdn.net/wp-content/uploads/2018/06/logo-mdb-jquery-small.webp"
+      alt="MDB Logo"
+      draggable="false"
+    />
+  </a>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
+  <ul class="sidenav-menu px-2">
+    <li class="sidenav-item">
+      <a class="sidenav-link"
+         href="{% url 'theme:orderTheme' request.user.username %}">
+        <i class="fas fa-chart-area fa-fw me-3"></i
+        ><span>Theme</span></a>
+    </li>
+    <li class="sidenav-item">
+      <a class="sidenav-link"
+      ><i class="fas fa-lock fa-fw me-3"></i><span>Password</span></a
+      >
+      <ul class="sidenav-collapse">
+        <li class="sidenav-item">
+          <a class="sidenav-link">Request password</a>
+        </li>
+        <li class="sidenav-item">
+          <a class="sidenav-link">Reset password</a>
+        </li>
+      </ul>
+    </li>
+    {% if user.is_superuser %}
+      <li class="sidenav-item pt-3">
+        <span class="sidenav-subheading text-muted text-uppercase fw-bold">Manage</span>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link" href="{% url 'users:userList' %}">
+          <i class="fas fa-plus fa-fw me-3"></i><span>Employees</span></a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+<!-- SideNav -->
+
+
+<!--Navbar-->
+<nav
+  id="main-navbar"
+  class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+>
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggler -->
+    <button
+      data-mdb-toggle="sidenav"
+      data-mdb-target="#sidenav-1"
+      class="btn shadow-0 p-0 me-3"
+      aria-controls="#sidenav-1"
+      aria-haspopup="true"
+    >
+      <i class="fas fa-bars fa-lg"></i>
+    </button>
+
+    <!-- Search form -->
+    <form class="d-none d-md-flex input-group w-auto my-auto">
+      <input
+        autocomplete="off"
+        type="search"
+        class="form-control rounded"
+        placeholder='Search (ctrl + "/" to focus)'
+        style="min-width: 225px"
+      />
+      <span class="input-group-text border-0"
+      ><i class="fas fa-search"></i
+      ></span>
+    </form>
+
+    <!-- Right links -->
+    <ul class="navbar-nav ms-auto d-flex flex-row">
+      <!-- Notification dropdown -->
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fas fa-bell"></i>
+          <span class="badge rounded-pill badge-notification bg-danger"
+          >1</span>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
+          <li><a class="dropdown-item" href="#">Some news</a></li>
+          <li><a class="dropdown-item" href="#">Another news</a></li>
+          <li>
+            <a class="dropdown-item" href="#">Something else here</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}">About</a>
-          </li>
-          {% if request.user.is_authenticated %}
-            <li class="nav-item">
-              {# URL provided by django-allauth/account/urls.py #}
-              <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% translate "My Profile" %}</a>
-            </li>
-            <li class="nav-item">
-              {# URL provided by django-allauth/account/urls.py #}
-              <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
-            </li>
-          {% else %}
-            {% if ACCOUNT_ALLOW_REGISTRATION %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
-              </li>
-            {% endif %}
-            <li class="nav-item">
-              {# URL provided by django-allauth/account/urls.py #}
-              <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
-            </li>
-          {% endif %}
         </ul>
-      </div>
-    </div>
-  </nav>
+      </li>
 
-</div>
+      <!-- Avatar -->
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://mdbootstrap.com/img/new/avatars/2.jpg"
+            class="rounded-circle"
+            height="22"
+            alt="Avatar"
+            loading="lazy"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
+          <li><a class="dropdown-item" href="#">My profile</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!--Navbar-->
 
 <div class="container-fluid">
 
@@ -99,11 +205,11 @@
       </div>
     {% endfor %}
   {% endif %}
+  <div id="block-content">
+    {% block content %}
 
-  {% block content %}
-    <p>Use this document as a way to quick start any new project.</p>
-  {% endblock content %}
-
+    {% endblock content %}
+  </div>
 </div> <!-- /container -->
 
 {% block modal %}{% endblock modal %}
@@ -121,3 +227,24 @@
 
 
 </html>
+
+
+
+{##}
+{#            <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>#}
+{##}
+{#            <a class="nav-link" href="{% url 'about' %}">About</a>#}
+{#          {% if request.user.is_authenticated %}#}
+{# URL provided by django-allauth/account/urls.py #}
+{#              <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% translate "My Profile" %}</a>#}
+{##}
+{# URL provided by django-allauth/account/urls.py #}
+{#              <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>#}
+{#          {% else %}#}
+{#            {% if ACCOUNT_ALLOW_REGISTRATION %}#}
+{# URL provided by django-allauth/account/urls.py #}
+{#                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>#}
+{#            {% endif %}#}
+{# URL provided by django-allauth/account/urls.py #}
+{#              <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>#}
+{#          {% endif %}#}

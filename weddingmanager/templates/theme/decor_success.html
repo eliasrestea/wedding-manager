@@ -1,0 +1,27 @@
+{% extends 'basenonav.html' %}
+{% block content %}
+  <h1 class="mt-5">success</h1>
+
+  <div id="chosen-decor" hx-swap-oob="true">
+    {% for item in order.chosen_decor_items.all %}
+      <div class="d-flex">
+        <button
+          hx-get="{% url 'theme:decorItemFile' item.id %}"
+          hx-trigger="mouseenter"
+          hx-target="#theme"
+          class="form-control mt-2 hover-shadow d-flex justify-content-between">{{ item }}
+          <a
+            hx-post="{% url 'theme:delete-decor-item' %}"
+            hx-include="[name='decor_item{{ item.id }}']"
+            hx-target="#theme"
+            class="d-flex">
+            X
+            <input type="hidden" value="{{ item.id }}" name="decor_item{{ item.id }}">
+          </a>
+        </button>
+      </div>
+
+    {% endfor %}
+  </div>
+  <div id="add-decor" hx-swap-oob="true"></div>
+{% endblock %}

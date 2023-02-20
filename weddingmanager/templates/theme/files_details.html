@@ -1,0 +1,11 @@
+<div id="theme" hx-swap-oob="true" class="col-md-9 vh-100 pt-5">
+{#  Desktop#}
+    <img class="d-none d-md-block img-fluid w-100 h-100 p-5 basic-transition object-cover"
+         src="{{ decoritem.image.url }}">
+
+{#  Mobile#}
+  <div class="d-md-none">
+        <img class="img-fluid basic-transition" src="{{ decoritem.image.url }}">
+  </div>
+
+</div>

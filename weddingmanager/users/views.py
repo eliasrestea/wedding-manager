@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DetailView, RedirectView, UpdateView
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 User = get_user_model()
 
@@ -46,3 +46,12 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+
+class UserListView(UserPassesTestMixin, ListView):
+    model = User
+    template_name = "users/user_list.html"
+    context_object_name = "users"
+
+    def test_func(self):
+        return self.request.user.is_superuser

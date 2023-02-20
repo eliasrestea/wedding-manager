@@ -13,6 +13,7 @@
       <div id="left-colon" class="col-9 d-none d-lg-block div-sticky ps-0 pb-0">
         <a href="{% url 'home' %}" class="h5 text-black-50 position-absolute p-3 font-monospace">Logo</a>
         <img id="venue-pic" class="img-fluid d-flex w-100 h-100" src="{% static 'images/display/venue.jpg' %}">
+
       </div>
 
 
@@ -32,43 +33,21 @@
           </div>
           <div id="venue-options" class="p-3">
             {% for venue in venues %}
-                <input
-                  hx-get="{% url "venues:servicesDetail"  venue %}"
-                  hx-trigger="click"
-                  hx-target="#services"
-                  type="button"
-                  class="form-control mt-2 text-start"
-                  name="venue"
-                  value="{{ venue }}"
-                  readonly>
+              <input
+                hx-get="{% url "venues:servicesDetail"  venue %}"
+                hx-trigger="click"
+                hx-target="#services"
+                type="button"
+                class="form-control mt-2 text-start"
+                name="venue"
+                value="{{ venue }}"
+                readonly>
             {% endfor %}
           </div>
         </div>
         <div id="services"></div>
 
+      </div>
     </div>
   </div>
-
 {% endblock %}
-
-
-{#<script>#}
-{#    //get the form#}
-{#    const venueForm = document.getElementById('venue-options')#}
-{#    //when implementing, replace [name='radio'] with name of radio input fields#}
-{#    const venueRadioButtons = document.querySelectorAll("input[name='venue']")#}
-{#    //get the default venue URL for later alteration#}
-{#    const venueURL = venueForm.getAttribute('hx-get')#}
-{##}
-{#    // create a click handler to change the URL to selected radiobutton#}
-{#    const clickHandler = () => {#}
-{#      //get the slug value#}
-{#      let radioButtonSlug=document.querySelector("input[name='venue']:checked").value()#}
-{#      //use regular expression to replace last '/word/' value with slug value#}
-{#      let newVenueUrl = venueURL.replace(/\/\w+\/$/, "/" + radioButtonSlug + "/")#}
-{#      //reset the hx_get value#}
-{#      venueForm.setAttribute('hx-get', newVenueUrl)#}
-{#    };#}
-{#    // Assign the handler to the radio buttons#}
-{#    venueRadioButtons.forEach(i => i.onchange = () => clickHandler());#}
-{#</script>#}

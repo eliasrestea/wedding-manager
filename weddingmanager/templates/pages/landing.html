@@ -1,37 +1,44 @@
-{% extends "base.html" %}
+{% extends "basenonav.html" %}
+{% load static %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
 
 {% block content %}
   <!--Main Navigation-->
   <header class="mb-5 mb-lg-7">
 
-    <!-- Navbar -->
-    <nav style="z-index: 1;
-              min-height: 58.59px;
-              " class="bg-white">
-      <!-- Container wrapper -->
-
-      <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-
     <!-- Background image -->
-    <div class="bg-image vh-100" style="
-                                      margin-top: -58.59px;
-                                      background-image: url('https://mdbcdn.b-cdn.net/img/new/fluid/city/018.jpg');">
+    <div class="bg-image vh-100" style="background-image: url('/static/images/display/landing.png');">
 
       <!-- Mask -->
-      <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">
+      <div class="mask">
 
         <!-- Container -->
         <div class="container d-flex justify-content-center align-items-center h-100">
 
           <!-- Call to action -->
           <div class="text-white text-center">
-            <h1 class="mb-3">Whoah, what a view!</h1>
-            <h5 class="mb-4">Learning web design is such an amazing thing</h5>
-            <a class="btn btn-secondary btn-rounded btn-lg m-2" data-ripple-color="primary" href="#" role="button">Learn
-              with me<i class="fas fa-graduation-cap ms-2"></i></a>
+            <h1 class="mb-3">Experience your dream wedding</h1>
+            <h5 class="mb-4">We take care of all the details so you can relax and enjoy</h5>
+            {% if request.user.is_authenticated %}
+              <a class="btn btn-secondary btn-rounded btn-lg m-2"
+                 data-ripple-color="primary"
+                 href="{% url 'main'  %}"
+                 role="button">Continue
+                <i class="fas fa-graduation-cap ms-2"></i></a>
+            {% else %}
+              <a  class="btn btn-secondary btn-rounded btn-lg m-2"
+                  data-ripple-color="primary"
+                  href="{% url 'account_login' %}"
+                  role="button">Join us
+                <i class="fas fa-graduation-cap ms-2"></i></a>
+            {% endif %}
+
           </div>
+
 
         </div>
 
@@ -120,19 +127,24 @@
 
             <h3 class="fw-bold mb-4">Details</h3>
 
-            <p>This beginner-friendly, example-based course will guide you through the essential knowledge of MDB
-              ecosystem.</p>
+            <p>You will be able to customize everything about your wedding from your bed, you can do
+              online and we will do everything
+              for you.</p>
 
-            <p class="mb-2"><strong>What will you learn:</strong></p>
+            <p class="mb-2"><strong>What can you do with us:</strong></p>
 
             <ul class="list-unstyled">
-              <li><i class="fas fa-check text-success me-2"></i>Bootstrap</li>
-              <li><i class="fas fa-check text-success me-2"></i>MDBootstrap</li>
-              <li><i class="fas fa-check text-success me-2"></i>UI & UX design</li>
-              <li><i class="fas fa-check text-success me-2"></i>Responsive web design</li>
+              <li><i class="fas fa-check text-success me-2"></i>Plan your wedding</li>
+              <li><i class="fas fa-check text-success me-2"></i>Send invitations</li>
+              <li><i class="fas fa-check text-success me-2"></i>Pay</li>
+              <li><i class="fas fa-check text-success me-2"></i>Do stuff</li>
             </ul>
 
-            <a class="btn btn-link btn-rounded" href="#" role="button" data-mdb-ripple-color="primary">Learn more</a>
+            <a class="btn btn-link btn-rounded"
+               role="button"
+               data-mdb-ripple-color="primary"
+               data-mdb-toggle="modal"
+               data-mdb-target="#exampleModal">Learn more</a>
 
           </div>
 
@@ -141,146 +153,6 @@
       </section>
       <!-- Section: Details -->
 
-      <!-- Section: Pricing -->
-      <section class="mb-5 mb-lg-10">
-
-        <h3 class="fw-bold text-center mb-5">Pricing</h3>
-
-        <div class="row gx-xl-5">
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 order-2 order-lg-1">
-
-            <div class="card h-100">
-              <div class="card-header text-center pt-4">
-                <p class="text-uppercase">
-                  <strong>Basic</strong>
-                </p>
-
-                <h3 class="mb-4">
-                  <strong>$ 7500</strong>
-                </h3>
-
-                <a
-                  type="button"
-                  class="btn btn-secondary btn-rounded w-100 mb-3"
-                  href="{% url "orders:create" %}"
-                >
-                  Buy
-                </a>
-
-              </div>
-              <div class="card-body">
-
-                <ol class="list-unstyled mb-0">
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Venue
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Garden available
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Candybar
-                  </li>
-                </ol>
-
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 order-1 order-lg-2">
-
-            <div class="card h-100">
-              <div class="card-header text-center pt-4">
-                <p class="text-uppercase">
-                  <strong>Advanced</strong>
-                </p>
-
-                <h3 class="mb-4">
-                  <strong>$ 10000</strong>
-                </h3>
-
-                <a
-                  type="button"
-                  class="btn btn-primary btn-rounded w-100 mb-3"
-                  href="{% url "orders:create" %}"
-                >
-                  Buy
-                </a>
-              </div>
-              <div class="card-body">
-                <ol class="list-unstyled mb-0">
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Venue
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Garden available
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Candybar
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Games organised
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Wine for everyone
-                  </li>
-                </ol>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 order-3 order-lg-3">
-
-            <div class="card h-100">
-              <div class="card-header text-center pt-4">
-                <p class="text-uppercase">
-                  <strong>Enterprise</strong>
-                </p>
-                <h3 class="mb-4">
-                  <strong>$ 15000</strong>
-                </h3>
-
-                <a
-                  type="button"
-                  class="btn btn-secondary btn-rounded w-100 mb-3"
-                  href="{% url "orders:create" %}"
-                >
-                  Buy
-                </a>
-              </div>
-              <div class="card-body">
-                <ol class="list-unstyled mb-0">
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Venue
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Garden available
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Candybar
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Games organised
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Wine for everyone
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Premium Photographer
-                  </li>
-                  <li class="mb-3">
-                    <i class="fas fa-check text-success me-3"></i>Premium Videography
-                  </li>
-                </ol>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </section>
-      <!-- Section: Pricing -->
   </main>
   <!--Main layout-->
 
@@ -416,7 +288,7 @@
       style="background-color: rgba(0, 0, 0, 0.2)"
     >
       © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/"
+      <a class="text-white"
       >MDBootstrap.com</a
       >
     </div>

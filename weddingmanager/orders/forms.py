@@ -6,7 +6,7 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ["total_price"]
+        fields = ["date"]
 
 
 # def __init__(self, *args, **kwargs):

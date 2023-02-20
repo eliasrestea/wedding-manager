@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="container-fluid pt-5">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-header">Manage your order here</h3>
+            <h4 class="card-text mt-3">{{ order.venue }}</h4>
+            <h4 class="card-text">Template: Custom</h4>
+            <h4 class="card-text">Service's</h4>
+            <h4 class="card-text">Date</h4>
+            <h4 class="card-text">Price : {{ order.total_price }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+
+
+{% endblock %}
