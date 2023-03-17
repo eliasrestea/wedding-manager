@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "dev": "tailwindcss -i weddingmanager/static/css/tailwind-input.css -o weddingmanager/static/css/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.7"
+  },
+  "dependencies": {
+    "daisyui": "^2.51.3"
+  }
+}

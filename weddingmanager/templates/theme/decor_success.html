@@ -2,25 +2,25 @@
 {% block content %}
   <h1 class="mt-5">success</h1>
 
-  <div id="chosen-decor" hx-swap-oob="true">
+  <div id="chosen-decor" hx-swap-oob="true" class="flex flex-col text-center mt-5">
     {% for item in order.chosen_decor_items.all %}
-      <div class="d-flex">
+      <div class="relative">
         <button
           hx-get="{% url 'theme:decorItemFile' item.id %}"
-          hx-trigger="mouseenter"
+          hx-trigger="mouseenter delay:1s"
           hx-target="#theme"
-          class="form-control mt-2 hover-shadow d-flex justify-content-between">{{ item }}
-          <a
-            hx-post="{% url 'theme:delete-decor-item' %}"
-            hx-include="[name='decor_item{{ item.id }}']"
-            hx-target="#theme"
-            class="d-flex">
-            X
-            <input type="hidden" value="{{ item.id }}" name="decor_item{{ item.id }}">
-          </a>
+          class="btn btn-wide btn-outline mt-3 red-button">{{ item }}
+        </button>
+        <button
+          hx-post="{% url 'theme:delete-decor-item' %}"
+          hx-include="[name='decor_item{{ item.id }}']"
+          hx-target="#theme"
+          class="btn btn-outline btn-error btn-xs text-black absolute">
+          X
+          <input type="hidden" value="{{ item.id }}" name="decor_item{{ item.id }}">
         </button>
       </div>
-
+      <img class="block lg:hidden max-w-full h-auto p-4" src="{{ item.image.url }}">
     {% endfor %}
   </div>
   <div id="add-decor" hx-swap-oob="true"></div>

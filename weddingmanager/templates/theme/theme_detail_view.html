@@ -2,48 +2,45 @@
 {% load static %}
 
 {% block content %}
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3 p-3 mt-5">
-        <h4 class="text-center pt-3">Create your decor</h4>
-        <div id="chosen-decor" hx-swap-oob="true">
-          {% for item in order.chosen_decor_items.all %}
-            <div class="d-flex">
-              <button
-                hx-get="{% url 'theme:decorItemFile' item.id %}"
-                hx-trigger="mouseenter"
-                hx-target="#theme"
-                class="form-control mt-2 hover-shadow d-flex justify-content-between">{{ item }}
-                <a
-                  hx-post="{% url 'theme:delete-decor-item' %}"
-                  hx-include="[name='decor_item{{ item.id }}']"
-                  hx-target="#theme"
-                  class="d-flex">
-                  X
-                  <input type="hidden" value="{{ item.id }}" name="decor_item{{ item.id }}">
-                </a>
-              </button>
-            </div>
-
-          {% endfor %}
-        </div>
-        <div id="add-decor">
-          {% if order.chosen_decor_items.count != items.count %}
-            <input
-              hx-get="{% url 'theme:select-decor-items'  %}"
-              hx-trigger="click"
+  <div class="grid lg:grid-cols-3 text-center">
+    <div>
+      <h1 class="text-center pt-3">Create your decor</h1>
+      <div id="chosen-decor" hx-swap-oob="true" class="flex flex-col text-center mt-5">
+        {% for item in order.chosen_decor_items.all %}
+          <div class="relative">
+            <button
+              hx-get="{% url 'theme:decorItemFile' item.id %}"
+              hx-trigger="mouseenter delay:1s"
               hx-target="#theme"
-              type="button"
-              class="form-control form-control-lg mt-5 text-center"
-              aria-label="disabled input example"
-              value="&#xFF0B;">
-          {% endif %}
-        </div>
+              class="btn btn-wide btn-outline mt-3 red-button">{{ item }}
+            </button>
+            <button
+              hx-post="{% url 'theme:delete-decor-item' %}"
+              hx-include="[name='decor_item{{ item.id }}']"
+              hx-target="#theme"
+              class="btn btn-outline btn-error btn-xs text-black absolute">
+              X
+              <input type="hidden" value="{{ item.id }}" name="decor_item{{ item.id }}">
+            </button>
+          </div>
+          <img class="block lg:hidden p-4" src="{{ item.image.url }}">
+        {% endfor %}
+      </div>
+      <div id="add-decor" hx-swap-oob="true" class="text-center mt-8">
+        {% if order.chosen_decor_items.count != items.count %}
+          <input
+            hx-get="{% url 'theme:select-decor-items'  %}"
+            hx-trigger="click"
+            hx-target="#theme"
+            type="button"
+            class="btn btn-circle btn-outline"
+            value="&#xFF0B;">
+        {% endif %}
+      </div>
+    </div>
 
-      </div>
-      <div id="theme" class="col-md-9 pe-0 vh-100">
-        <img class="img-fluid w-100 h-100" src="{% static  'images/display/venue.jpg' %}">
-      </div>
+    <div id="theme" class="col-span-2 px-1 hidden lg:block">
+      <img src="{% static  'images/display/venue.jpg' %}">
     </div>
   </div>
 
